@@ -31,19 +31,26 @@ const TopNav = () => {
   };
 
   return (
-    <div className="w-full h-[10vh] relative flex items-center justify-start px-5 md:px-10 bg-black z-50">
+    // ✅ Fixed navbar
+    <div className="w-full h-[60px] fixed top-0 left-0 flex items-center justify-between px-4 md:px-10 bg-black z-50 shadow-md">
+      {/* Logo */}
+      <div className="flex items-center gap-2">
+        <i className="text-[#6556CD] ri-tv-fill text-xl"></i>
+        <span className="text-white font-bold text-lg">SCSDB</span>
+      </div>
+
       {/* Search Input */}
-      <div className="relative flex items-center w-full md:w-[500px] ml-[5%]">
+      <div className="relative flex items-center w-[70%] sm:w-[80%] md:w-[500px]">
         <div className="flex items-center w-full bg-zinc-800/60 hover:bg-zinc-700/70 
                         border border-zinc-700 focus-within:border-[#6556CD]
-                        px-4 py-2 md:py-3 rounded-full shadow-md transition duration-300">
-          <i className="ri-search-line text-zinc-400 text-lg md:text-xl"></i>
+                        px-3 py-2 rounded-full shadow-md transition duration-300">
+          <i className="ri-search-line text-zinc-400 text-base md:text-lg"></i>
           <input
             onChange={(e) => setQuery(e.target.value)}
             value={query}
             type="text"
-            placeholder="Search movies, shows or people..."
-            className="ml-3 w-full bg-transparent text-zinc-200 text-sm md:text-lg 
+            placeholder="Search..."
+            className="ml-2 w-full bg-transparent text-zinc-200 text-sm md:text-base 
                        outline-none placeholder:text-zinc-500"
           />
           {query.length > 0 && (
@@ -52,7 +59,7 @@ const TopNav = () => {
                 setQuery("");
                 setSearches([]);
               }}
-              className="ri-close-line text-zinc-400 text-xl md:text-2xl cursor-pointer 
+              className="ri-close-line text-zinc-400 text-lg md:text-xl cursor-pointer 
                          hover:text-white transition ml-2"
             ></i>
           )}
@@ -60,10 +67,10 @@ const TopNav = () => {
 
         {/* Dropdown Overlay */}
         {query.trim().length > 0 && searches.length > 0 && (
-          <div className="absolute left-0 top-full mt-3 w-[95%] md:w-[700px] 
+          <div className="absolute left-0 top-full mt-2 w-full md:w-[700px] 
                           bg-zinc-900/90 backdrop-blur-md rounded-xl shadow-2xl 
-                          max-h-[70vh] overflow-y-auto z-50 p-5 animate-fadeIn">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+                          max-h-[70vh] overflow-y-auto z-50 p-4 fade-in">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {searches.map((s, i) => {
                 const imageUrl = s.poster_path
                   ? `https://image.tmdb.org/t/p/w300${s.poster_path}`
@@ -77,15 +84,13 @@ const TopNav = () => {
                     className="bg-zinc-800/60 hover:bg-zinc-700/70 rounded-lg overflow-hidden 
                                shadow-md hover:shadow-xl transition duration-300 flex flex-col"
                   >
-                    {/* Poster */}
                     <img
                       src={imageUrl}
                       alt={s.title || s.name || "No Title"}
-                      className="w-full h-[220px] object-cover"
+                      className="w-full h-[200px] object-cover"
                     />
 
-                    {/* Info Section */}
-                    <div className="p-3 flex flex-col flex-grow">
+                    <div className="p-2 flex flex-col flex-grow">
                       <h2 className="text-white text-sm md:text-base font-semibold truncate">
                         {s.title || s.name}
                       </h2>
@@ -99,11 +104,10 @@ const TopNav = () => {
                         {s.media_type?.toUpperCase()}
                       </p>
 
-                      {/* Button */}
                       <Link
                         to={`/${s.media_type === "person" ? "people" : s.media_type}/details/${s.id}`}
                         className="mt-auto bg-[#6556CD] hover:bg-[#4c44a6] text-white 
-                                   text-center text-xs md:text-sm px-3 py-2 rounded-lg transition"
+                                   text-center text-xs md:text-sm px-2 py-1 rounded-lg transition"
                       >
                         More Info
                       </Link>
