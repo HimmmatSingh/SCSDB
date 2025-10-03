@@ -4,7 +4,7 @@ import axios from "axios";
 
 import TopNav from "./templetes/TopNav";
 import Dropdown from "./Dropdown";
-import Cards from "./cards";
+import Cards from "./Cards";
 import Loading from "../utiles/Loading";
 
 const Trending = () => {
