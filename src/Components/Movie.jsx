@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import TopNav from "./templetes/TopNav";
-import Cards from "./cards";
+import Cards from "./Cards";
 import Loading from "../utiles/Loading";
 import Dropdown from "./Dropdown";
 
